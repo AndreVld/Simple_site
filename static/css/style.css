@@ -1,0 +1,786 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    scroll-behavior: smooth;
+}
+
+.container#blur {
+    transition: 0.7s;
+}
+
+.container#blur.active {
+    filter: blur(20px);
+    pointer-events: none;
+    user-select: none;
+}
+
+
+#popup {
+    background: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    max-height: 90vh;
+    border-radius: 5px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, .30);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.9s;
+    overflow: scroll;
+}
+
+#popup i {
+    position: sticky;
+    left: 100%;
+    top: 0;
+    cursor: pointer;
+}
+
+#popup i:hover {
+    transition : 0.3s;
+    color : red;
+}
+
+#popup.active {
+    visibility: visible;
+    opacity: 1;
+    transition: 0.9s;
+    background: #edf5ff;
+}
+
+#popup::-webkit-scrollbar {
+    width: 0;
+}
+
+.popupBx {
+    margin: 0 30px;
+}
+.popupBx p {
+    margin-top : 30px;
+}
+
+.git_hub{
+    margin:10px;
+    display: flex;
+}
+.git_hub a {
+    margin-left :5px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#login {
+    position: fixed;
+    top: -30%;
+    right: 5%;
+    z-index: 1000;
+    width: 450px;
+    border-radius: 10px;
+    padding: 60px 50px 20px;
+    background: #373737;
+    visibility: hidden;
+    transition: 0.9s;
+
+}
+
+#login.active {
+    visibility: visible;
+    top: 7%;
+}
+
+
+#login form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#login form input {
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 16px;
+    background: #222;
+    border: none;
+    outline: none;
+    color: #fff;
+    resize: none;
+    border-radius: 5px;
+    transition: 0.9s;
+}
+
+#login form input::placeholder {
+    color: #999;
+}
+
+#login form input:focus {
+    box-shadow: 0 0 30px #2196f3;
+
+}
+
+#login form input[type="submit"] {
+    max-width: 100px;
+    background: #999;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#login form input[type="submit"]:hover {
+    box-shadow: 0 0 30px #2196f3;
+}
+
+
+#login .close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    color: #999;
+    transition: 0.5s;
+}
+
+#login .close:hover {
+    cursor: pointer;
+    color: red;
+    transition: 0.5s;
+}
+
+
+
+section {
+    padding: 150px;
+    background: #edf5ff;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 100px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    transition: 0.5s;
+}
+
+header.sticky {
+    background: #edf5ff;
+    padding: 20px 100px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+    color: #fff;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+header.sticky .logo {
+    color: #111;
+}
+
+header ul {
+    position: relative;
+    display: flex;
+}
+
+header ul li {
+    position: relative;
+    list-style-type: none;
+}
+
+header ul li a {
+    position: relative;
+    display: inline-block;
+    margin: 0 15px;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+header.sticky ul li a {
+    color: #111;
+}
+
+header ul li a:hover {
+    color: #2196f3;
+    font-size: 20px;
+}
+
+
+
+.banner {
+    position: relative;
+    min-height: 100vh;
+    background: url('images/coding.jpeg');
+    background-size: cover;
+    background-position: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.textBx {
+    margin-left: 350px;
+}
+
+.banner h2 {
+    font-size: 3em;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1.5em;
+}
+
+.banner h2 span {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.banner h3 {
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.btn {
+    position: relative;
+    background: #2196f3;
+    display: inline-block;
+    color: #fff;
+    margin-top: 20px;
+    padding: 10px 30px;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    border-radius: 3px;
+    transition: 0.5s;
+}
+
+.btn:hover {
+    background: #fff;
+    color: #2196f3;
+    box-shadow: 0 0 25px #fff;
+}
+
+
+.heading {
+    margin : 0 auto;
+    width: 50%;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #111;
+}
+
+.heading h2 {
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contentBx {
+    padding-right: 30px;
+}
+
+.contentBx h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.w50 {
+    min-width: 50%;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+.certificates {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    background: #edf5ff;
+}
+
+
+.works {
+    background: url('images/py_django.jpg');
+    background-size: contain;
+}
+
+.heading.white {
+    color: #fff;
+}
+
+.works .content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.works .content .worksBx {
+    padding: 40px 20px 20px 20px;
+    background: rgba(196, 196, 196, 0.09);
+    color: #edf5ff;
+    width: 680px;
+    max-height: 600px;
+    margin: 20px;
+    border-radius: 15px;
+    transition: 0.5s;
+    display: flex;
+    flex-direction: column;
+}
+
+.works .content .worksBx:hover {
+    background: #222;
+    border-radius: 2px;
+}
+
+.works .content .worksBx img {
+    width: 640px;
+    height: 360px;
+    object-fit: contain;
+}
+
+.works .content .worksBx h2 {
+    margin: 5px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.works .content .worksBx p {
+    margin-bottom: 5px;
+    margin-left: 15px
+}
+
+.works .content .worksBx .tagBx {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.works .content .worksBx .tagBx .tag {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 4px;
+    background: #476f48;
+    color: #5dd7ff;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.works .content .worksBx .read_edit{
+    align-self: flex-end;
+}
+
+.works .content .worksBx input {
+    padding: 5px 0 5px 5px;
+    color: #5dd7ff;
+    border: none;
+    background: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.5s;
+
+}
+
+.works .content .worksBx a {
+    color: #5dd7ff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.5s;
+    text-decoration: none;
+}
+
+.works .content .worksBx a:hover,
+.works .content .worksBx input:hover {
+    color: white;
+}
+
+.contact {
+    background: #111;
+}
+
+.formBx {
+    min-width: 60%;
+}
+
+.formBx form {
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+}
+
+.formBx form h3,
+.contactInfo h3 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.formBx form input,
+.formBx form textarea {
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 16px;
+    background: #222;
+    border: none;
+    outline: none;
+    color: #fff;
+    resize: none;
+    transition: 1s;
+}
+
+.formBx form input:focus,
+.formBx form textarea:focus{
+    box-shadow: 0 0 30px #2196f3;
+    border-radius: 10px;
+}
+
+.formBx form textarea {
+    min-height: 200px;
+}
+
+.formBx form input::placeholder,
+.formBx form textarea::placeholder {
+    color: #999;
+}
+
+.formBx form input[type="submit"] {
+    max-width: 100px;
+    background: #2196f3;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 5px;
+}
+.formBx form input[type="submit"]:hover{
+    box-shadow: 0 0 25px #2196f3;
+}
+
+
+.contactInfo {
+    min-width: 40%;
+}
+
+.contactInfoBx {
+    position: relative;
+}
+
+.contactInfoBx .box {
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+}
+
+.contactInfoBx .box .icon {
+    min-width: 40px;
+    padding-top: 4px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 24px;
+}
+
+.contactInfoBx .box .text {
+    display: flex;
+    margin-left: 20px;
+    font-size: 16px;
+    color: #fff;
+    flex-direction: column;
+}
+
+.contactInfoBx .box .text h3 {
+    color: #2196f3;
+    margin-bottom: 0;
+}
+
+.contactInfoBx .box .text a {
+    color: #fff;
+    font-size: 17px
+}
+
+.contactInfoBx .box .text a:hover {
+    text-decoration : none;
+}
+
+
+.copyright {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+
+
+.postFormBx {
+    margin: 0 auto;
+    padding: 100px;
+    min-height: 100vh;
+    background: #222;
+}
+
+.postFormBx form {
+    margin: 0 auto;
+    width: 65%;
+    padding: 15px 25px;
+    border-radius: 30px;
+    background: rgba(196, 196, 196, 0.09);
+    box-shadow: 0 0 30px #999;
+}
+
+.postFormBx form>div {
+    margin-bottom: 25px;
+}
+
+.postFormBx form label {
+    color: #5dd7ff;
+    font-size: 25px;
+}
+
+.postFormBx form input[type="text"],
+.postFormBx form textarea,
+.postFormBx form input[type="url"]{
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    background: #222;
+    border: none;
+    outline: none;
+    color: #fff;
+    resize: none;
+    border-radius: 5px;
+    transition: 1s;
+}
+
+.postFormBx form input[type="text"]:focus,
+.postFormBx form textarea:focus,
+ .postFormBx form input[type="url"]:focus{
+    box-shadow: 0 3px 30px #2196f3;
+}
+
+
+.postFormBx form textarea {
+    min-height: 200px;
+}
+
+.postFormBx form input[type="submit"] {
+    background: #2196f3;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    outline: none;
+}
+
+.postFormBx form input[type="submit"]:hover {
+    box-shadow: 0 0 20px #2196f3;
+}
+
+.postFormBx form input[type="file"] {
+    color: rgb(82, 82, 82);
+}
+
+
+
+@media (max-width: 991px) {
+
+
+    header,
+    header.sticky {
+        padding: 20px 50px;
+        z-index: 1000;
+    }
+
+    .menu {
+        position: fixed;
+        top: 68px;
+        left: -100%;
+        display: block;
+        padding: 100px 50px;
+        text-align: center;
+        width: 100%;
+        height: 100vh;
+        background: #fff;
+        transition: 0.5s;
+        z-index: 999;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .menu.active {
+        left: 0;
+    }
+
+    header ul li a {
+        color: #111;
+        font-size: 24px;
+        margin: 10px;
+    }
+
+    header ul li a:hover {
+        font-size: 24px;
+    }
+
+    .toggle {
+        width: 40px;
+        height: 40px;
+        background: url('images/menu.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 30px;
+        cursor: pointer;
+    }
+
+    .toggle.active {
+        background: url('images/close.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 25px;
+        cursor: pointer;
+    }
+
+    header.sticky .toggle {
+        filter: invert(1);
+    }
+
+    section {
+        padding: 75px 50px;
+    }
+
+    .textBx {
+        margin-left: 40px;
+    }
+
+    .banner {
+        padding: 150px 50px 100px;
+    }
+
+    .banner h2 {
+        font-size: 1.5em;
+    }
+
+    .banner h3 {
+        font-size: 1em;
+    }
+
+    .btn {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    .heading h2 {
+        font-size: 24px;
+    }
+
+    .contentBx h3 {
+        font-size: 20px;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    .w50 {
+        margin-bottom: 20px;
+    }
+
+
+    .works .content .worksBx {
+        margin: 10px;
+    }
+
+    .works .content .worksBx img {
+        max-width: 100%;
+    }
+
+    .contactInfo {
+        margin: 20px 0;
+    }
+
+    #popup {
+        width: 95%;
+    }
+
+    .popupBx {
+        margin: 0 20px;
+    }
+
+    .postFormBx {
+        padding: 60px;
+    }
+
+    .postFormBx form {
+        width: 85%;
+        padding: 10px 15px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    header,
+    header.sticky {
+        padding: 20px 20px;
+    }
+
+    .banner {
+        padding: 150px 20px 100px;
+    }
+
+    .textBx {
+        margin-left: 0;
+    }
+
+    section {
+        padding: 50px 20px;
+    }
+
+    .works .content .worksBx {
+        max-width: 100%;
+    }
+
+    .popupBx {
+        margin: 0 10px;
+    }
+
+    .postFormBx {
+        padding: 30px;
+    }
+
+    .postFormBx form {
+        width: 100%;
+        padding: 5px 10px;
+    }
+
+    #login{
+        max-width:100%;
+        right : 0;
+    }
+
+}
+
+

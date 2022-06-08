@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'css/images/favicon.ico'%}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>lorem</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+    <script type="text/javascript">
+
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getToken('csrftoken');
+    </script>
+
+</head>
+
+<body>
+{% block form %}
+<div class="container" id="blur">
+    <header>
+        <a href="#contact" class="logo">Lorem ipsum</a>
+        <div class="toggle" onclick="toggleMenu();"></div>
+        <ul class="menu">
+            <li><a href="#home" onclick="toggleMenu();">Home</a></li>
+            <li><a href="#about" onclick="toggleMenu();">About</a></li>
+            <li><a href="#my_works" onclick="toggleMenu();">My works</a></li>
+            <li><a href="#contact" onclick="toggleMenu();">Contacts</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'create_post' %}">Create Post</a></li>
+            <li><a href="{% url 'logout' %}">Out <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+            {% endif %}
+        </ul>
+    </header>
+
+    <section class="banner" id="home">
+        <div class="textBx">
+            <h2>Hello, I'm <br><span> Andrey</span></h2>
+            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+            <a href="#about" class="btn">About Me</a>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="heading">
+            <h2>About Me</h2>
+        </div>
+        <div class="content">
+            <div class="contentBx w50">
+                <p>{{ info.about_me }}</p>
+            </div>
+            <div class="w50">
+<!--                <img src="{% static 'images/about.png' %}" alt="#">-->
+                <img src="{{ info.img.url }}" alt="#">
+            </div>
+        </div>
+    </section>
+
+    {% if certificates.exists %}
+    <section class="certificates">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+
+                {% for certificate in certificates %}
+                <div class="swiper-slide" style="max-width: 640px;">
+
+                    <a style="align-self: center;" target="_blank" href="{{ certificate.link }}"><img
+                            src="{{ certificate.image.url }}"/></a>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+
+    <section class="works" id="my_works">
+        <div class="heading white">
+            <h2>My Works</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+        <div class="content">
+
+            {% for post in object_list %}
+            <div class="worksBx">
+                <img src="{{ post.thumbnail.url }}" alt="#">
+                <h2>{{ post.headline }}</h2>
+                {% if post.sub_headline is not None %}
+                <p>{{ post.sub_headline|truncatewords:60 }}</p>
+                {% endif %}
+                <hr>
+                <div class="tagBx">
+                    {% for tag in post.tags.all %}
+                    <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                <div class="read_edit">
+                    <input name="{{post.slug}}" type="button" value="View">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'update_post' post.slug %}">|Edit</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="heading white">
+            <h2>Contact Me</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+        <div class="content">
+            <div class="contactInfo">
+                <h3>Contact Info</h3>
+                <div class="contactInfoBx">
+                    <div class="box">
+                        <div class="icon">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </div>
+                        <div class="text">
+                            <h3>Email</h3>
+                            <a href="mailto:{{ info.email }}">{{ info.email }}</a>
+                        </div>
+                    </div>
+                    <!--<div class="box">
+                        <div class="icon">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                        </div>
+                        <div class="text">
+                            <h3>Phone</h3>
+                            <p>843275935</p>
+                        </div>
+                    </div>-->
+                    <div class="box">
+                        <div class="icon">
+                            <i class="fa fa-telegram"></i>
+                        </div>
+                        <div class="text">
+                            <h3>Telegram</h3>
+                            <a target="_blank" href="{{ info.telegram }}">{{ info.telegram|cut:'https://' }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="formBx">
+                <form action="{% url 'send_mail' %}" method="POST">
+                    {% csrf_token %}
+                    <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.!</h3>
+                    <input required type="text" name="name" id="input_full_name" placeholder="Full Name">
+                    <input required type="email" name="email" placeholder="Email">
+                    <textarea required name="message" placeholder="Your Message"></textarea>
+                    <input type="submit" value="Send">
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div class="copyright">
+        <p>Copyright &copy; Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    </div>
+</div>
+
+
+<section id="popup">
+    <i class="fa fa-window-close" onclick="modal()" aria-hidden="true"></i>
+    {% include 'base/includes/inc_read_post.html' %}
+</section>
+
+
+{% if not user.is_authenticated %}
+
+<section id="login">
+    <form id="form">
+        <input required name="login" type="text" placeholder="Login...">
+        <input required name="password" type="password" autocomplete="on" placeholder="Password...">
+        <input type="submit" value="Login">
+    </form>
+    <i onclick="popupLogin();" class="fa fa-window-close close" aria-hidden="true"></i>
+</section>
+
+
+<script type="text/javascript">
+    let input_full_name = document.getElementById('input_full_name')
+
+    input_full_name.oninput = function () {
+        if(this.value == 'show login form'){
+            let login_form = document.getElementById('login')
+            login_form.classList.toggle('active')
+            }
+        }
+
+</script>
+
+
+<script type="text/javascript">
+        let form = document.getElementById('form')
+
+        form.addEventListener('submit', function (ev) {
+            ev.preventDefault()
+
+            let url = 'login/'
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                    'login': form.login.value,
+                    'password': form.password.value
+                })
+            })
+
+                .then((response) => {
+                    if (response.ok) {
+                        location.reload()
+                    } else {
+                        alert('Please enter the correct username and password for a staff account. Note that both fields may be case-sensitive.')
+                    }
+                })
+        })
+
+</script>
+
+{% endif %}
+
+
+<script src=" https://use.fontawesome.com/2864f9279e.js "></script>
+
+
+<script type="text/javascript">
+        function modal() {
+            let blur = document.getElementById('blur');
+            blur.classList.toggle('active')
+            let popup = document.getElementById('popup');
+            popup.classList.toggle('active')
+        }
+
+</script>
+
+<script type="text/javascript">
+        window.addEventListener('scroll', function () {
+            let header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        })
+
+        function toggleMenu() {
+            let menuToggle = document.querySelector('.toggle');
+            let menu = document.querySelector('.menu');
+            menuToggle.classList.toggle('active')
+            menu.classList.toggle('active')
+        }
+
+
+</script>
+
+<script type="text/javascript">
+        function popupLogin() {
+            let login = document.getElementById('login')
+            login.classList.toggle('active')
+        }
+
+</script>
+
+
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/ajax.js' %}"></script>
+
+
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script type="text/javascript">
+        var swiper = new Swiper(".mySwiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+                rotate: 20,
+                stretch: 0,
+                depth: 250,
+                modifier: 1,
+                slideShadows: true,
+            },
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+        });
+
+</script>
+
+{% endblock %}
+</body>
+
+</html>

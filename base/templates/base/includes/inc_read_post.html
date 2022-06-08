@@ -1,0 +1,17 @@
+<div class="popupBx">
+
+    <h2>{{ post }}</h2>
+    <div class="git_hub">
+        <div><i class="fa fa-github fa-lg" aria-hidden="true"></i></div>
+        <a href="{{ post.git }}" target="_blank">{{ post.git }}</a>
+    </div>
+    <p>
+        {{ post.content|safe }}
+    </p>
+
+<!--    <div class="git_hub">-->
+<!--        <div><i class="fa fa-github fa-lg" aria-hidden="true"></i></div>-->
+<!--        <a href="{{ post.git }}" target="_blank">{{ post.git }}</a>-->
+<!--    </div>-->
+
+</div>
